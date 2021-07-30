@@ -59,5 +59,14 @@ namespace CabInvoiceGeneratorTest
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GetInvoiceSummary()
+        {
+            Rides[] rides = { new Rides(20, 10), new Rides(30, 10) };
+            string actual;
+            string expected = "Number of rides = 2\nTotalFare =520\nAverageFare = 260";
+            actual = invoice.CalculateAggregateFare(rides);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
