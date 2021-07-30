@@ -23,10 +23,26 @@ namespace CabInvoiceGenerator
             {
                 if (distance <= 0)
                     throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_DISTANCE, "Invalid Distance");
-                if (time<= 0)
+                if (time <= 0)
                     throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_TIME, "Invalid Time");
             }
             return Math.Max(minFare, totalFare);
+        }
+        public double CalculateAggregateFare(Rides[] rides)
+        {
+            double totalFare = 0;
+            try
+            {
+                foreach (Rides i in rides)
+                {
+                    totalFare += CalculateTotalFare(i.distance, i.time);
+                }
+            }
+            catch (CabInvoiceException)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE, "Invalid ride");
+            }
+            return totalFare;
         }
     }
 }

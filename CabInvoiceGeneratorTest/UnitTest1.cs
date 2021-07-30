@@ -50,5 +50,14 @@ namespace CabInvoiceGeneratorTest
                 Assert.AreEqual(ex.Message,"Invalid Distance");
             }
         }
+        [TestMethod]
+        public void TotalFareForMultipleRides()
+        {
+            Rides[] rides = { new Rides(20, 10), new Rides(30, 10) };
+            var actual = invoice.CalculateAggregateFare(rides);
+            double expected = 520;
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
