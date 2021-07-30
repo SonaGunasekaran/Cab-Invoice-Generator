@@ -9,6 +9,27 @@ namespace CabInvoiceGenerator
         double ratePerKm = 10;
         double minFare=5;
         double ratePerMin=1;
+
+        public enum RideType
+        {
+            PREMIUM, NORMAL
+        }
+
+        public CabInvoice(RideType ridetype)
+        {
+            if (ridetype.Equals(RideType.NORMAL))
+            {
+                ratePerKm = 10;
+                minFare = 5;
+                ratePerMin = 1;
+            }
+            if (ridetype.Equals(RideType.PREMIUM))
+            {
+                ratePerKm = 15;
+                minFare = 20;
+                ratePerMin = 2;
+            }
+        }
         // calculate total fare
         public double CalculateTotalFare(double distance, double time)
         {
