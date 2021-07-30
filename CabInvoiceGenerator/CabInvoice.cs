@@ -28,9 +28,10 @@ namespace CabInvoiceGenerator
             }
             return Math.Max(minFare, totalFare);
         }
-        public double CalculateAggregateFare(Rides[] rides)
+        public string CalculateAggregateFare(Rides[] rides)
         {
             double totalFare = 0;
+            
             try
             {
                 foreach (Rides i in rides)
@@ -42,7 +43,9 @@ namespace CabInvoiceGenerator
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_RIDE, "Invalid ride");
             }
-            return totalFare;
+            InvoiceSummary summary = new InvoiceSummary(rides.Length, totalFare);
+            return "Number of rides = "+" "+summary.numOfRides+" "+" \n TotalFare = "+" "+summary.totalFare+" "+"\n AverageFare = "+" "+summary.avgFare;
         }
+
     }
 }
